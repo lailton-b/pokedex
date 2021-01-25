@@ -8,6 +8,8 @@ const Routes: React.FC = () => {
     <BrowserRouter>
       <Switch>
         <Route path="/" exact component={Home} />
+        <Route path="/pokedex" exact component={Home} />
+        <Route path="/pokedex/page/:slug" exact component={Home} />
         <Route path="/page/:slug" exact component={Home} />
       </Switch>
     </BrowserRouter>
