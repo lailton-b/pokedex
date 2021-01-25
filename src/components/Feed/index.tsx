@@ -76,7 +76,7 @@ const Feed: React.FC = () => {
 
         <Pagination>
           { previous !== undefined && (
-            <Link to={`/page/${previous}`} className="pagination_link prev">
+            <Link to={`/pokedex/page/${previous}`} className="pagination_link prev">
               <ArrowLeft />
               Prev
             </Link>
@@ -90,14 +90,14 @@ const Feed: React.FC = () => {
           </Page>
 
           { Number(slug) < 88 && (
-            <Link to={`/page/${next}`} className="pagination_link next">
+            <Link to={`/pokedex/page/${next}`} className="pagination_link next">
               Next
               <ArrowRight />
             </Link>
           )}
 
           { slug === undefined && (
-            <Link to={`/page/${next}`} className="pagination_link next">
+            <Link to={`/pokedex/page/${next}`} className="pagination_link next">
               Next
               <ArrowRight />
             </Link>
