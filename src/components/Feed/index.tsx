@@ -47,15 +47,15 @@ const Feed: React.FC = () => {
         }
 
         setData(finalData);
-        setLoading(false);
       }
+      setLoading(false);
     } 
 
     fetchPoke();
   }, [slug]);
 
-  if (loading) return(
-    <Loading>
+  if (data === null && loading) return (
+    <Loading className="loading_screen">
       <img src={PokemonLoading} alt="Loading" />
     </Loading>
   )
@@ -65,21 +65,32 @@ const Feed: React.FC = () => {
         <Wrapper>
           { data.map((pokemon) => (
             <Card key={pokemon.name} className={pokemon.type}>
-              <img src={pokemon.picture} alt={pokemon.name} />
-              <div>
-                <strong>{pokemon.name}</strong>
-                <span>Type: {pokemon.type}</span>
-              </div>
+              { loading ? (
+                <Loading>
+                  <img src={PokemonLoading} alt="Loading..." />
+                </Loading>
+              ) : (
+                <>
+                  <img src={pokemon.picture} alt={pokemon.name} />
+                  <div className="pokemon_info">
+                    <strong>{pokemon.name}</strong>
+                    <span>Type: {pokemon.type}</span>
+                  </div>
+                </>
+              ) }
+              
             </Card>
           )) }
         </Wrapper>
 
         <Pagination>
           { previous !== undefined && (
-            <Link to={`/pokedex/page/${previous}`} className="pagination_link prev">
-              <ArrowLeft />
-              Prev
-            </Link>
+            <div className={`prev ${loading && 'loading'}`}>
+              <Link to={`/pokedex/page/${previous}`} className="pagination_link prev">
+                <ArrowLeft />
+                Prev
+              </Link>
+            </div>
           )}
 
           <Page>
@@ -90,17 +101,21 @@ const Feed: React.FC = () => {
           </Page>
 
           { Number(slug) < 88 && (
-            <Link to={`/pokedex/page/${next}`} className="pagination_link next">
-              Next
-              <ArrowRight />
-            </Link>
+            <div className={`next ${loading && 'loading'}`}>
+              <Link to={`/pokedex/page/${next}`} className="pagination_link next">
+                Next
+                <ArrowRight />
+              </Link>
+            </div>
           )}
 
           { slug === undefined && (
-            <Link to={`/pokedex/page/${next}`} className="pagination_link next">
-              Next
-              <ArrowRight />
-            </Link>
+            <div className={`next ${ loading && 'loading' }`}>
+              <Link to={`/pokedex/page/${next}`} className="pagination_link next">
+                Next
+                <ArrowRight />
+              </Link>
+            </div>
           )}
         </Pagination>
       </Container>
@@ -110,9 +125,9 @@ const Feed: React.FC = () => {
       <Page>
         There is no more pokemon here ):
         <Pagination>
-        <Link to='/' className="pagination_link">
-          <ArrowLeft />
-        </Link> 
+          <Link to='/' className="pagination_link">
+            <ArrowLeft />
+          </Link> 
         </Pagination>
       </Page>
     </Container>

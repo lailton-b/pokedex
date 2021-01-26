@@ -37,7 +37,7 @@ export const Wrapper = styled.ul`
 
 export const Card = styled.li`
   position: relative;
-  padding: 30px 0;
+  // padding: 30px 0;
   height: 273.19px;
   border-radius: 15px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
@@ -72,11 +72,12 @@ export const Card = styled.li`
     width: 150px;
     height: 150px;
     border-radius: 50%;
+    margin-top: 30px;
 
     background-color: rgba(54, 52, 52, 0.1);
   }
 
-  > div {
+  .pokemon_info {
     position: absolute;
     bottom: 30px;
     left: 50%;
@@ -86,7 +87,7 @@ export const Card = styled.li`
   > img {
     display: block;
     width: 65%;
-    margin: 15px auto 0;
+    margin: 45px auto 0;
 
     @media (max-width: 540px) {
       width: 50%;
@@ -150,6 +151,19 @@ export const Pagination = styled.div`
       margin-left: 5px;
     }
   }
+
+  div {
+    width: 108px;
+    height: 44px;
+
+    &.loading {
+      cursor: not-allowed;
+
+      .pagination_link {
+        pointer-events: none;
+      }
+    }
+  }
 `;
 
 export const Page = styled.span` 
@@ -163,26 +177,32 @@ export const Page = styled.span`
 `;
 
 export const Loading = styled.div` 
-  position: absolute;
-  top: 50%;
-  left: 50%;
+  position: relative;
   z-index: 2;
-
-  transform: translate(-50%, -50%);
 
   display: flex;
   justify-content: center;
 
-  width: 200px;
-  height: 200px;
+  width: 100%;
+  height: 100%;
 
   background-color: #161b22;
   border-radius: 10px;
-  box-shadow: 0 0 0 3px #fac706, 0 0 0 6px #161b22;
+  border: 3px solid #fac706;
 
   img {
     width: 100px;
-    animation: loading 1s ease-in-out infinite;
+    animation: loading 1.5s ease-in-out infinite;
+  }
+
+  &.loading_screen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 200px;
+    height: 200px;
   }
 
   @keyframes loading {
